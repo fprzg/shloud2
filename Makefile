@@ -14,7 +14,7 @@ confirm:
 ## install: Setup database and app.
 .PHONY: install
 install: db/setup app/setup
-	@php artisan migrate
+	php artisan migrate
 	@echo 'App installed successfully'
 
 
