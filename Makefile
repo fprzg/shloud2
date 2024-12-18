@@ -37,11 +37,11 @@ db/setup:
 	@echo "Connecting to PostgreSQL and setting up user and database..."
 
 	@echo "Creating database 'shloud2'"
-	psql -U postgres -c "CREATE DATABASE shloud2;"
+	sudo -u postgres psql -c "CREATE DATABASE shloud2;"
 
 	@echo "Creating user 'shloud2'"
-	psql -U postgres -c "CREATE USER shloud2 WITH PASSWORD 'pssw0rd';"
-	psql -U postgres -d shloud -c "GRANT USAGE, CREATE, ALTER ON DATABASE shloud2 TO shloud2;"
+	sudo -u postgres psql -c "CREATE USER shloud2 WITH PASSWORD 'pssw0rd';"
+	sudo -u postgres psql -d shloud2 -c "GRANT USAGE, CREATE ON SCHEMA public TO shloud2;"
 
 	@echo "Database setup completed successfully."
 
@@ -50,8 +50,8 @@ db/setup:
 .PHONY: db/clean
 db/clean: 
 	@echo 'Cleaning up database...'
-	psql -U postgres -c "DROP DATABASE IF EXISTS shloud2;"
-	psql -U postgres -c "DROP USER IF EXISTS shloud2;"
+	sudo -u postgres psql -c "DROP DATABASE IF EXISTS shloud2;"
+	sudo -u postgres psql -c "DROP USER IF EXISTS shloud2;"
 	@echo "Cleanup completed."
 
 
